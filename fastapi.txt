@@ -8,7 +8,7 @@ DELETE - DELETE DATA FROM A DATABASE
 End point parameter
 used to return data realating to input in the path
 path parameter 
-quire parameter
+query parameter
 
 ------------------------------------------------
 Since we are collecting data from the web, 
@@ -20,3 +20,10 @@ lt - less than
 ge - greater than or equal to 
 
 ------------------------------------------------
+path parameter 
+
+@app.get("/get-student/{student_id}")  # get-student is an endpoint. just like /home
+def get_student(student_id: int = Path(None, description="The ID of the student you want to view",\
+ gt=0, lt=3)):  # student_id is like a variable that stores the value returned
+    return students[student_id]  # its specifying to return student_id / variable from the student 
+THIS IS AN EXAMPLE OF A PATH PARAMETER
