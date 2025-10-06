@@ -24,7 +24,7 @@ def get_student(
 
 @app.get("/get-by-name")
 def get_student(name: str):
-    for student_id in students:
+    for student_id in students:  # Use a meaningful variable name in place of student_id 
         if students[student_id]["name"] == name:
             return students[student_id]
     return {"Data": "Not found!"}
