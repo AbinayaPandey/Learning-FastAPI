@@ -1,0 +1,22 @@
+GET - GET AN INFORMATION
+POST - CREATE SOMETHING IN A DATABASE
+PUT - UPDATE SOMETHING IN A PARTICULAR DATABASE
+DELETE - DELETE DATA FROM A DATABASE
+
+------------------------------------------------
+
+End point parameter
+used to return data realating to input in the path
+path parameter 
+quire parameter
+
+------------------------------------------------
+Since we are collecting data from the web, 
+we can specify what kind of data we are collecting 
+with the help of some methods 
+
+gt - greater than
+lt - less than
+ge - greater than or equal to 
+
+------------------------------------------------
