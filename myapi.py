@@ -22,8 +22,8 @@ def get_student(
     ]  # its specifying to return student_id / variable from the student
 
 
-@app.get("/get-by-name")
-def get_student(name: str):
+@app.get("/get-by-name/{student_id}")
+def get_student(student_id: int, name: str):
     for student_id in students:  # Use a meaningful variable name in place of student_id 
         if students[student_id]["name"] == name:
             return students[student_id]
