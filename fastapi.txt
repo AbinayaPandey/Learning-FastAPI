@@ -5,8 +5,7 @@ DELETE - DELETE DATA FROM A DATABASE
 
 ------------------------------------------------
 
-End point parameter
-used to return data realating to input in the path
+End point parameter - used to return data realating to input in the path
 path parameter 
 query parameter
 
@@ -27,3 +26,15 @@ def get_student(student_id: int = Path(None, description="The ID of the student 
  gt=0, lt=3)):  # student_id is like a variable that stores the value returned
     return students[student_id]  # its specifying to return student_id / variable from the student 
 THIS IS AN EXAMPLE OF A PATH PARAMETER
+
+------------------------------------------------ 
+Qurey parameter
+
+@app.get("student_info/")
+def get_info():
+return 
+
+
+
+------------------------------------------------
+uvicorn file_name:function_name --reload
