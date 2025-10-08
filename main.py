@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Path, Query
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -16,14 +17,20 @@ students = {
 }
 
 
+class Students(BaseModel):
+    name: str
+    age: int
+    year: str
+
+
 @app.get("/")
 def index():
     return "hello my name is Abinaya Pandey"
 
 
-# @app.get("/stds_info/{student_id}")
-# def get_info(student_id: int = Path (description="Input the id of the student")):
-#     return students[student_id]
+@app.get("/stds_info/{student_id}")
+def get_info(student_id: int = Path (description="Input the id of the student")):
+    return students[student_id]
 
 
 @app.get("/student_info/")
@@ -31,4 +38,13 @@ def get_info(std_id: int = Path(description="Enter student id", gt=0, lt=11)):
     if std_id not in students:
         return {"error": "Student not found"}
     return students[std_id]
+
+
+@app.get("/student_info")
+def get_info_by_name(name: str = Query(description="Enter student name")):
+    for id in students:
+        if students[id]["name"] == name:
+            return students[id]
+    return {"error": "name doesn't exist"}
+
 
