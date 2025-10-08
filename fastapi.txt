@@ -1,3 +1,8 @@
+------------------------------------------------
+uvicorn file_name:function_name --reload
+
+
+------------------------------------------------
 GET - GET AN INFORMATION
 POST - CREATE SOMETHING IN A DATABASE
 PUT - UPDATE SOMETHING IN A PARTICULAR DATABASE ( THAT ALREADY EXISTS )
@@ -31,10 +36,10 @@ THIS IS AN EXAMPLE OF A PATH PARAMETER
 Qurey parameter
 
 @app.get("student_info/")
-def get_info():
-return 
-
+def get_info(student_info: int = Path(description="Enter student id " )):
+    if student_info not in students:
+        return {"error: student not found}
+    return students[student_info]
 
 
 ------------------------------------------------
-uvicorn file_name:function_name --reload

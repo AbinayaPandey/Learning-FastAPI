@@ -1,50 +1,25 @@
-from fastapi import FastAPI, Path, Query
-from pydantic import BaseModel
+from fastapi import FastAPI, Path
 
 app = FastAPI()
 
-students = {
-    1: {"name": "Abinaya", "age": 20, "year": "bachelor 2nd year"},
-    2: {"name": "Nischal", "age": 13, "year": "year 6"},
-    3: {"name": "Arjun", "age": 19, "year": "bachelor 1st year"},
-    4: {"name": "Priya", "age": 22, "year": "masters 1st year"},
-    5: {"name": "Kiran", "age": 10, "year": "year 3"},
-    6: {"name": "Sara", "age": 17, "year": "year 12"},
-    7: {"name": "Dev", "age": 15, "year": "year 9"},
-    8: {"name": "Mitali", "age": 25, "year": "phd 2nd year"},
-    9: {"name": "Zain", "age": 12, "year": "year 5"},
-    10: {"name": "Rhea", "age": 21, "year": "bachelor 3rd year"},
-}
-
-
-class Students(BaseModel):
-    name: str
-    age: int
-    year: str
+std_info = {1: {"name": "Abinaya", "age": 20, "ethnicity": "hindu"}}
 
 
 @app.get("/")
 def index():
-    return "hello my name is Abinaya Pandey"
+    return {"Hello to the index page"}
 
 
-@app.get("/stds_info/{student_id}")
-def get_info(student_id: int = Path (description="Input the id of the student")):
-    return students[student_id]
+@app.get("/info_by_id")
+def info_by_id(std_id: int):
+    if std_id not in std_info:
+        return {"Error": "Id doesn't exist"}
+    return std_info[std_id]
 
 
-@app.get("/student_info/")
-def get_info(std_id: int = Path(description="Enter student id", gt=0, lt=11)):
-    if std_id not in students:
-        return {"error": "Student not found"}
-    return students[std_id]
-
-
-@app.get("/student_info")
-def get_info_by_name(name: str = Query(description="Enter student name")):
-    for id in students:
-        if students[id]["name"] == name:
-            return students[id]
-    return {"error": "name doesn't exist"}
-
-
+@app.get("/info_by_name")
+def info_by_name(name: str):
+    for std_id in std_info:
+        if std_info[std_id]["name"].lower() == name.lower():
+            return std_info[std_id]
+    return {"Error": "Name doesn't exist"}

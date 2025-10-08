@@ -1,5 +1,6 @@
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Path, HTTPException, status
 from pydantic import BaseModel
+
 
 app = FastAPI()
 
@@ -42,7 +43,7 @@ def get_student(student_id: int, name: str):
 @app.post("/create-student/{student_id}")
 def create_student(student_id: int, student: Student):
     if student_id in students:  # if student { your value } already in list
-        return {"Error": "Student already exist"}
+        raise HTTPException(status_code=400, detail="Student already exists ")
     students[student_id] = student
-    return students
+    return {"message": "Student created", "student": students[student_id]}
 
