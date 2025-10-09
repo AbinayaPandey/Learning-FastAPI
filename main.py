@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Path, HTTPException, status
+from fastapi import FastAPI, HTTPException, status, Query
 from typing import Optional
 from pydantic import BaseModel
 
@@ -71,3 +71,10 @@ def put_by_id(std_id: int, students: Updated_info):  # students: Std_info becaus
 
     return {"message":f"Students info for id {std_id} has been updated"}
 
+@app.delete("/delete-info/")
+def delete_info(std_id: int):
+    if std_id not in std_info:
+        raise HTTPException(status.HTTP_404_NOT_FOUND,detail=f"Student with id '{std_id}' not found in the list",)
+
+    del std_info[std_id]
+    return {"message": f"Info of the student {std_id} deleted successfully"}
