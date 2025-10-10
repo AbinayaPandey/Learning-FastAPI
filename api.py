@@ -45,3 +45,13 @@ def post_by_id(item_id: int, things: Item):
     inventory[item_id] = things.model_dump()
     return inventory[item_id]
 
+
+@app.delete("/delete-by-id/")
+def delete_by_id(item_id: int):
+    if item_id not in inventory:
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND,
+            detail=f"Item of id '{item_id}' does not exist in the list",
+        )
+    del inventory[item_id]
+    return {"Message": f"Item of id '{item_id}' deleted successfully "}
