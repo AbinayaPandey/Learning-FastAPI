@@ -20,7 +20,9 @@ def get_by_id(items_id: int):
 @app.get("/get-by-name/")
 def get_by_name(name: str = Query(description="Enter the name of the item you want to display")):
     for item in items:
-        if items[items]["name"].lower() = name.lower()
-    # if name not in items:
-    #     raise HTTPException(status.HTTP_404_NOT_FOUND, detail=f"Name '{name}' not found in the item list")
-    # return items[name]
+        if items[item]["name"].lower() == name.lower():
+            return items[item]
+    raise HTTPException(status.HTTP_404_NOT_FOUND,detail=f"Name '{name}' not found in the item list",)
+    
+
+    
